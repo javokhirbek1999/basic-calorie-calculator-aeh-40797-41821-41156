@@ -1,97 +1,70 @@
+# Getting Started with Create React App
 
-# Basic Calorie Calculator - Frontend'
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Overview
+## Available Scripts
 
-<b>Basic Calorie Calculator</b> is a <i>Web App</i> built using <b>React.js</b> and <b>Django REST Framework</b> that allows users to set calorie consumption goals or in general keep track of their calorie consumption and at the same time share it with their friends.
+In the project directory, you can run:
 
-This is the documentation for Backend.
+### `npm start`
 
-## App Features
-- User registration and login
-- Send friend requests to different users
-- Set calorie consumption goals and keep track of them
-- Share their progress with their friends by posting their goal achievements
-- Leave coments on other people's posts
-- Clean and responsive design
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
+### `npm test`
 
-## Prerequisites
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-Ensure that the following tools are installed on your local development machine:
+### `npm run build`
 
-1. **Node.js** (v23.4 or higher)  
-   You can download it from [Node.js official site](https://nodejs.org/).
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-2. **Yarn** (optional but recommended)  
-   Yarn is used for package management in this project. You can install it from [Yarn official site](https://classic.yarnpkg.com/lang/en/docs/install/).
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-3. **React**  
-   React is the main library used for the frontend development.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Getting Started
+### `npm run eject`
 
-Follow these steps to install and run the AEHSTweet project locally.
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-### 1. Clone the repository
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Clone the AEHSTweet repository to your local machine:
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-`git clone https://github.com/javokhirbek1999/basic-calorie-calculator-aeh-40797-41821-41156.git` 
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-### 2. Install dependencies
+## Learn More
 
-Navigate to the project folder and install the required dependencies using Yarn:
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-`yarn install`
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-If you don't have Yarn installed, you can use `npm` instead:
+### Code Splitting
 
-`npm install`
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### 3. Set up the environment
+### Analyzing the Bundle Size
 
-Before running the app, you may need to configure a few environment variables to connect to the backend API (e.g., `localhost:8000`).
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-Make sure to clone and run the <a href="https://github.com/javokhirbek1999/basic-calorie-calculator-aeh-40797-41821-41156/tree/main/backend" target="_blank">backend</a>.
-Once the backend is running in your `localhost:8000`, you need to set the `API_URL` point to `localhost:8000/api` in `src/api.js`.
+### Making a Progressive Web App
 
-### 4. Run the app locally
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-To run the app locally in development mode, use the following command:
+### Advanced Configuration
 
-`yarn start`
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-Or with npm:
+### Deployment
 
-`npm start`
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-The app will open in your default browser at [http://localhost:3000](http://localhost:3000).
+### `npm run build` fails to minify
 
-### 5. Build for production
-
-To build the app for production (optimized for performance and ready for deployment), run:
-
-`yarn build`
-
-Or with npm:
-
-`npm run build`
-
-This will create a `build` directory with all the compiled files that are ready to be served by a web server.
-
-### 6. Test Offline Capabilities
-
-To test the offline capabilities of the Progressive Web App, follow these steps:
-
-1. Open the app in your browser.
-2. Turn off your internet connection.
-
-## Contributing
-
-We welcome contributions! Please fork the repository, create a feature branch, and submit a pull request for any improvements or fixes. Be sure to include tests for any new features or bug fixes.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
