@@ -1,5 +1,5 @@
 
-# Basic Calorie Calculator - Frontend'
+# Basic Calorie Calculator - Frontend
 
 ## Overview
 
