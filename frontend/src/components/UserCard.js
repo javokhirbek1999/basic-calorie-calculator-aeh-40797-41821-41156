@@ -1,19 +1,26 @@
 // src/components/UserCard.js
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const UserCard = ({ name, calories, image }) => {
+const UserCard = ({ id, name, calories, image }) => {
   return (
-    <div style={styles.card}>
-      <img src={image} alt={name} style={styles.image} />
-      <div style={styles.details}>
-        <h3 style={styles.name}>{name}</h3>
-        <p style={styles.calories}>🍽️ {calories} kcal</p>
+    <Link to={`/profile/${id}`} style={styles.link}>
+      <div style={styles.card}>
+        <img src={image} alt={name} style={styles.image} />
+        <div style={styles.details}>
+          <h3 style={styles.name}>{name}</h3>
+          <p style={styles.calories}>🍽️ {calories} kcal</p>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
 const styles = {
+  link: {
+    textDecoration: 'none',
+    color: 'inherit',
+  },
   card: {
     border: '1px solid #e0e0e0',
     borderRadius: '12px',

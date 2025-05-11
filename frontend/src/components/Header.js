@@ -1,13 +1,20 @@
 // src/components/Header.js
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <header style={styles.header}>
-      <div style={styles.logo}>Calorie Tracker</div>
+      <Link to="/" style={styles.logo}>
+        Calorie Tracker
+      </Link>
       <div style={styles.authButtons}>
-        <button style={{ ...styles.button, ...styles.register }}>Register</button>
-        <button style={{ ...styles.button, ...styles.login }}>Login</button>
+        <Link to="/register" style={{ ...styles.button, ...styles.register }}>
+          Register
+        </Link>
+        <Link to="/login" style={{ ...styles.button, ...styles.login }}>
+          Login
+        </Link>
       </div>
     </header>
   );
@@ -30,6 +37,7 @@ const styles = {
     fontSize: '1.8rem',
     fontWeight: '600',
     color: '#333',
+    textDecoration: 'none',
   },
   authButtons: {
     display: 'flex',
@@ -42,6 +50,8 @@ const styles = {
     fontSize: '0.95rem',
     cursor: 'pointer',
     border: 'none',
+    textDecoration: 'none',
+    display: 'inline-block',
     transition: 'all 0.2s ease-in-out',
   },
   register: {
