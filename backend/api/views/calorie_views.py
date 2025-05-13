@@ -4,6 +4,7 @@ from django.http import Http404
 from rest_framework import status
 from rest_framework import generics
 from rest_framework.views import APIView
+from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
@@ -85,3 +86,20 @@ class IntakeDetailView(generics.RetrieveUpdateDestroyAPIView):
             return Http404(f'The calorie intake instance with ID: {intake_id} does not exist.')
         
         return intake
+
+
+class IntakeUserListView(generics.ListAPIView):
+
+    serializer_class = IntakeSerializer
+    permission_classes = [calorie_permissions.IsIntakeOwnerOrReadOnly]
+
+    def get_queryset(self):
+        user_email = self.kwargs['user_email']
+        user = get_user_model().objects.filter(email=user_email).first()
+
+        if not user:
+            raise NotFound(detail=f'User with the email {user_email} does not exist.')
+
+        return Intake.objects.filter(product__user=user)
+    
+    
