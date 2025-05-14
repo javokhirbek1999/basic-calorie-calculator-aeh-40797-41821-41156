@@ -23,7 +23,7 @@ class Product(models.Model):
             'id': self.user.id,
             'first_name': self.user.first_name,
             'last_name': self.user.last_name,
-            'email': self.user_email,
+            'email': self.user.email,
         }
 
     def __str__(self):
