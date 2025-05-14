@@ -5,27 +5,58 @@ import axios from '../api/axios'; // Axios instance
 
 const Home = () => {
   const [users, setUsers] = useState([]);
+  const [userCalories, setUserCalories] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchUsersAndCalories = async () => {
       try {
-        const token = localStorage.getItem('token'); // Get token from localStorage
-        const response = await axios.get('users/', {
+        const token = localStorage.getItem('token');
+        const userRes = await axios.get('users/', {
           headers: {
-            Authorization: `Bearer ${token}`, // Send token in the headers
+            Authorization: `Bearer ${token}`,
           },
         });
-        setUsers(response.data); // Set the users data
+
+        const usersData = userRes.data;
+        setUsers(usersData);
+
+        const today = new Date().toISOString().slice(0, 10); // Format: 'YYYY-MM-DD'
+        const caloriesMap = {};
+
+        await Promise.all(
+          usersData.map(async (user) => {
+            try {
+              const intakeRes = await axios.get(`calories/intakes/${user.email}`, {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              });
+
+              const intakes = intakeRes.data;
+              const todayKcal = intakes
+                .filter((entry) => entry.date_taken.startsWith(today))
+                .reduce((sum, entry) => sum + entry.total_kcal_taken, 0);
+
+              caloriesMap[user.email] = todayKcal;
+            } catch (err) {
+              console.error(`Failed to fetch intake for ${user.email}`, err);
+              caloriesMap[user.email] = 0;
+            }
+          })
+        );
+
+        setUserCalories(caloriesMap);
       } catch (err) {
-        setError('Failed to fetch users');
+        console.error('Failed to fetch users', err);
+        setError('Failed to load user data');
       } finally {
-        setLoading(false); // Set loading to false after the API call
+        setLoading(false);
       }
     };
 
-    fetchUsers();
+    fetchUsersAndCalories();
   }, []);
 
   if (loading) {
@@ -41,10 +72,10 @@ const Home = () => {
       <div style={styles.userGrid}>
         {users.map((user) => (
           <UserCard
-            key={user.email} // Use user email as the unique key
-            id={user.email} // Assuming email is unique
+            key={user.email}
+            id={user.email}
             name={`${user.first_name} ${user.last_name}`}
-            calories={user.caloriesToday || 0} // Placeholder for caloriesToday
+            calories={userCalories[user.email] || 0}
             image={`https://ui-avatars.com/api/?name=${encodeURIComponent(user.first_name)}+${encodeURIComponent(user.last_name)}&background=random&color=fff&size=256`}
           />
         ))}

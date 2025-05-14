@@ -14,7 +14,9 @@ const Profile = () => {
   const [intakeForm, setIntakeForm] = useState({ product: '', amount: '' });
   const [products, setProducts] = useState([]);
   const [intakes, setIntakes] = useState([]);  // New state for intake history
+
   const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -135,6 +137,23 @@ const Profile = () => {
 
   const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.first_name)}+${encodeURIComponent(user.last_name)}&background=random&color=fff&size=256`;
 
+  const today = new Date();
+  const todayDate = today.toISOString().split('T')[0];
+  const thisMonth = today.getMonth();
+  const thisYear = today.getFullYear();
+  const todayKcal = intakes
+  .filter((i) => new Date(i.date_taken).toISOString().split('T')[0] === todayDate)
+  .reduce((sum, i) => sum + i.total_kcal_taken, 0);
+
+  const monthKcal = intakes
+    .filter((i) => {
+      const d = new Date(i.date_taken);
+      return d.getMonth() === thisMonth && d.getFullYear() === thisYear;
+    })
+    .reduce((sum, i) => sum + i.total_kcal_taken, 0);
+
+  const lifetimeKcal = intakes.reduce((sum, i) => sum + i.total_kcal_taken, 0);
+
   return (
     <div style={styles.container}>
       <div style={styles.profileHeader}>
@@ -143,9 +162,9 @@ const Profile = () => {
           <h2 style={styles.name}>{user.first_name} {user.last_name}</h2>
           <p style={styles.registered}>📅 Joined: {new Date(user.date_joined).toLocaleDateString()}</p>
           <div style={styles.stats}>
-            <div style={{ ...styles.statCard, backgroundColor: '#e0f7fa' }}><strong>Today</strong><span>0 kcal</span></div>
-            <div style={{ ...styles.statCard, backgroundColor: '#fff3e0' }}><strong>This Month</strong><span>0 kcal</span></div>
-            <div style={{ ...styles.statCard, backgroundColor: '#e8f5e9' }}><strong>Lifetime</strong><span>0 kcal</span></div>
+            <div style={{ ...styles.statCard, backgroundColor: '#e0f7fa' }}><strong>Today</strong><span>{todayKcal} kcal</span></div>
+            <div style={{ ...styles.statCard, backgroundColor: '#fff3e0' }}><strong>This Month</strong><span>{monthKcal} kcal</span></div>
+            <div style={{ ...styles.statCard, backgroundColor: '#e8f5e9' }}><strong>Lifetime</strong><span>{lifetimeKcal} kcal</span></div>
           </div>
           {isOwnProfile && (
             <div style={styles.profileActions}>
