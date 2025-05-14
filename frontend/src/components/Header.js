@@ -1,20 +1,44 @@
 // src/components/Header.js
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem('email');
+    setEmail(storedEmail || '');
+  }, []);
+
+  const handleLoginClick = () => {
+    if (email) {
+      navigate(`/profile/${email}`); // Use email in the URL
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <header style={styles.header}>
       <Link to="/" style={styles.logo}>
         Calorie Tracker
       </Link>
       <div style={styles.authButtons}>
-        <Link to="/register" style={{ ...styles.button, ...styles.register }}>
-          Register
-        </Link>
-        <Link to="/login" style={{ ...styles.button, ...styles.login }}>
-          Login
-        </Link>
+        {email ? (
+          <button onClick={handleLoginClick} style={{ ...styles.button, ...styles.login }}>
+            {email}
+          </button>
+        ) : (
+          <>
+            <Link to="/register" style={{ ...styles.button, ...styles.register }}>
+              Register
+            </Link>
+            <Link to="/login" style={{ ...styles.button, ...styles.login }}>
+              Login
+            </Link>
+          </>
+        )}
       </div>
     </header>
   );
